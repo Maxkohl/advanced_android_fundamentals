@@ -1,6 +1,7 @@
 package com.example.android.fragmentexample;
 
 import android.os.Bundle;
+import android.renderscript.Sampler;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RadioGroup;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SimpleFragment extends Fragment {
 
@@ -24,7 +26,7 @@ public class SimpleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        final View rootView =  inflater.inflate(R.layout.fragment_simple, container, false);
+        final View rootView = inflater.inflate(R.layout.fragment_simple, container, false);
         final RadioGroup radioGroup = rootView.findViewById(R.id.radio_group);
         final RatingBar ratingBar = rootView.findViewById(R.id.song_ratingbar);
 
@@ -44,6 +46,14 @@ public class SimpleFragment extends Fragment {
                     default:
                         break;
                 }
+            }
+        });
+
+        ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+            @Override
+            public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
+                String rating = String.valueOf(v);
+                Toast.makeText(getContext(), rating , Toast.LENGTH_SHORT).show();
             }
         });
 

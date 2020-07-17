@@ -709,6 +709,9 @@ id radio
 id radio_button_no
 id radio_button_yes
 id radio_group
+id radio_layout
+id rate_song_title
+id rating_layout
 id right_icon
 id right_side
 id screen
@@ -730,6 +733,7 @@ id shortcut
 id showCustom
 id showHome
 id showTitle
+id song_ratingbar
 id spacer
 id split_action_bar
 id spread
@@ -854,6 +858,7 @@ string no
 string no_message
 string open
 string question_article
+string rate_song
 string search_menu_title
 string status_bar_notification_info_overflow
 string title1
