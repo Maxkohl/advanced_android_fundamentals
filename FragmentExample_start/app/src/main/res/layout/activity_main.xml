@@ -44,7 +44,7 @@
         android:layout_margin="8dp"
         app:layout_constraintLeft_toLeftOf="parent"
         />
-    
+
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
