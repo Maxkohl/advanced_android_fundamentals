@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         mButton = findViewById(R.id.open_button);
     }
 
-    public void displayFragment(){
+    public void displayFragment() {
         SimpleFragment simpleFragment = SimpleFragment.newInstance();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -44,5 +44,17 @@ public class MainActivity extends AppCompatActivity {
         mButton.setText(R.string.close);
         isFragmentDisplayed = true;
 
+    }
+
+    public void closeFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        SimpleFragment simpleFragment =
+                (SimpleFragment) fragmentManager.findFragmentById(R.id.fragment_container);
+        if (simpleFragment != null) {
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.remove(simpleFragment).commit();
+        }
+        mButton.setText(R.string.open);
+        isFragmentDisplayed = false;
     }
 }
