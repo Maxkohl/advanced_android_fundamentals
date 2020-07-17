@@ -32,9 +32,6 @@ import com.example.android.songdetailstart.content.SongUtils;
  */
 public class SongDetailActivity extends AppCompatActivity {
 
-    // SongItem includes the song title and detail.
-    public SongUtils.Song mSong;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +49,7 @@ public class SongDetailActivity extends AppCompatActivity {
         // get the data from a content repository.
         mSong = SongUtils.SONG_ITEMS.get
                 (getIntent().getIntExtra(SongUtils.SONG_ID_KEY, 0));
-        // Show the detail information in a TextView.
-        if (mSong != null) {
-            ((TextView) findViewById(R.id.song_detail))
-                    .setText(mSong.details);
-        }
+
     }
 
     /**
