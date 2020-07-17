@@ -15,7 +15,8 @@ public class SimpleFragment extends Fragment {
 
     private static final int YES = 0;
     private static final int NO = 1;
-
+    private static final int NONE = 2;
+    OnFragmentInteractionListener mListener;
 
     public SimpleFragment() {
         // Required empty public constructor
@@ -23,6 +24,10 @@ public class SimpleFragment extends Fragment {
 
     public static SimpleFragment newInstance(){
         return new SimpleFragment();
+    }
+
+    interface OnFragmentInteractionListener{
+        void onRadioButtonChoice(int choice);
     }
 
 
