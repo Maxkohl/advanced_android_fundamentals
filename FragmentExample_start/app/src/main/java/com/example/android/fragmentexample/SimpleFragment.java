@@ -18,6 +18,7 @@ public class SimpleFragment extends Fragment {
     private static final int NO = 1;
     private static final int NONE = 2;
     OnFragmentInteractionListener mListener;
+    public int mRadioButtonChoice;
 
     public SimpleFragment() {
         // Required empty public constructor
@@ -50,11 +51,17 @@ public class SimpleFragment extends Fragment {
                 switch (index) {
                     case YES:
                         textView.setText(R.string.yes_message);
+                        mRadioButtonChoice = YES;
+                        mListener.onRadioButtonChoice(YES);
                         break;
                     case NO:
                         textView.setText(R.string.no_message);
+                        mRadioButtonChoice = NO;
+                        mListener.onRadioButtonChoice(NO);
                         break;
                     default:
+                        mRadioButtonChoice = NONE;
+                        mListener.onRadioButtonChoice(NONE);
                         break;
                 }
             }
