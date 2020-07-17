@@ -33,6 +33,5 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="8dp"
             android:text="@string/no"/>
-
     </RadioGroup>
 </LinearLayout>
