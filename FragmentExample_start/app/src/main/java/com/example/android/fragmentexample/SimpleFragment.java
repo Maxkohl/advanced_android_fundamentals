@@ -1,5 +1,6 @@
 package com.example.android.fragmentexample;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.renderscript.Sampler;
 import android.support.v4.app.Fragment;
@@ -22,11 +23,11 @@ public class SimpleFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static SimpleFragment newInstance(){
+    public static SimpleFragment newInstance() {
         return new SimpleFragment();
     }
 
-    interface OnFragmentInteractionListener{
+    interface OnFragmentInteractionListener {
         void onRadioButtonChoice(int choice);
     }
 
@@ -63,10 +64,20 @@ public class SimpleFragment extends Fragment {
             @Override
             public void onRatingChanged(RatingBar ratingBar, float v, boolean b) {
                 String rating = String.valueOf(v);
-                Toast.makeText(getContext(), rating , Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), rating, Toast.LENGTH_SHORT).show();
             }
         });
 
         return rootView;
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new ClassCastException(context.toString() + getResources().getString(R.string.exception_message));
+        }
     }
 }
