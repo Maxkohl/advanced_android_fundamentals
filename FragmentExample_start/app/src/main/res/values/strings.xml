@@ -40,5 +40,6 @@
     <string name="exception_message">must implement OnFragmentInteractionListener</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="rate_song">Like the song?</string>
 
 </resources>
