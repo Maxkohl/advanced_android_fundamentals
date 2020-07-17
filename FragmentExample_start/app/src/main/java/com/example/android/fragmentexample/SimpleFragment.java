@@ -21,6 +21,10 @@ public class SimpleFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public static SimpleFragment newInstance(){
+        return new SimpleFragment();
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -29,6 +33,7 @@ public class SimpleFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_simple, container, false);
         final RadioGroup radioGroup = rootView.findViewById(R.id.radio_group);
         final RatingBar ratingBar = rootView.findViewById(R.id.song_ratingbar);
+
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
