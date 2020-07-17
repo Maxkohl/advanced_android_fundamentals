@@ -26,6 +26,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.android.songdetailstart.content.SongUtils;
+import com.example.android.songs.SongDetailFragment;
 
 /**
  * An activity representing a single song detail screen.
@@ -45,11 +46,11 @@ public class SongDetailActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        // This activity displays the detail. In a real-world scenario,
-        // get the data from a content repository.
-        mSong = SongUtils.SONG_ITEMS.get
-                (getIntent().getIntExtra(SongUtils.SONG_ID_KEY, 0));
-
+        if (savedInstanceState == null){
+            int selectedSong = getIntent().getIntExtra(SongUtils.SONG_ID_KEY, 0);
+            SongDetailFragment fragment = SongDetailFragment.newInstance(selectedSong);
+            getSupportFragmentManager().beginTransaction().add(R.id.song_detail_container, fragment).commit();
+        }
     }
 
     /**

@@ -970,6 +970,7 @@ layout design_navigation_item_subheader
 layout design_navigation_menu
 layout design_navigation_menu_item
 layout design_text_input_password_icon
+layout fragment_song_detail
 layout notification_action
 layout notification_action_tombstone
 layout notification_media_action
@@ -1032,6 +1033,7 @@ string article_subtitle
 string article_title
 string bottom_sheet_behavior
 string character_counter_pattern
+string hello_blank_fragment
 string password_toggle_content_description
 string path_password_eye
 string path_password_eye_mask_strike_through

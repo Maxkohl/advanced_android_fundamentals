@@ -1,6 +1,7 @@
 package com.example.android.songs;
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,9 +29,17 @@ public class SongDetailFragment extends Fragment {
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments().containsKey(SongUtils.SONG_ID_KEY)) {
+            mSong = SongUtils.SONG_ITEMS.get(getArguments().getInt(SongUtils.SONG_ID_KEY));
+        }
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_song_detail, container, false);
+        View rootView = inflater.inflate(R.layout.song_detail, container, false);
         if (mSong != null) {
             ((TextView) rootView.findViewById(R.id.song_detail))
                     .setText(mSong.details);

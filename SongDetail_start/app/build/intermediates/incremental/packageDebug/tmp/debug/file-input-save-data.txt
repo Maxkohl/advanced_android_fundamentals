@@ -1,5 +1,5 @@
 #Internal package file, do not edit.
-#Fri Jul 17 15:06:44 EDT 2020
+#Fri Jul 17 15:58:34 EDT 2020
 0.baseType=DIRECTORY
 0.base=C\:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\SongDetail_start\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 0.path=classes.dex
