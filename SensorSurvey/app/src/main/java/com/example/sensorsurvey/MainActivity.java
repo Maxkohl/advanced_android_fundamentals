@@ -3,13 +3,15 @@ package com.example.sensorsurvey;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
 
     private SensorManager mSensorManager;
     private Sensor mLightSensor;
@@ -22,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
+        mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 
         mTextSensorLight = findViewById(R.id.label_light);
         mTextSensorProximity = findViewById(R.id.label_proximity);
@@ -37,5 +39,33 @@ public class MainActivity extends AppCompatActivity {
         if (mProximitySensor == null) {
             mTextSensorProximity.setText(sensor_error);
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mLightSensor != null) {
+            mSensorManager.registerListener(this, mLightSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        }
+        if (mProximitySensor != null) {
+            mSensorManager.registerListener(this, mProximitySensor,
+                    SensorManager.SENSOR_DELAY_NORMAL);
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mSensorManager.unregisterListener(this);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent sensorEvent) {
+
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int i) {
+
     }
 }
