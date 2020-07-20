@@ -1,4 +1,4 @@
-#Mon Jul 20 17:00:25 EDT 2020
+#Mon Jul 20 17:26:47 EDT 2020
 base.0=C\:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\LocaleText_start\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\0
 path.0=classes.dex
 renamed.0=classes.dex

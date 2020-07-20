@@ -796,6 +796,7 @@ id action_context_bar
 id action_divider
 id action_help
 id action_image
+id action_language
 id action_menu_divider
 id action_menu_presenter
 id action_mode_bar
@@ -1082,6 +1083,7 @@ string character_counter_pattern
 string description
 string dial_log_message
 string help_text
+string language
 string nougat
 string password_toggle_content_description
 string path_password_eye
