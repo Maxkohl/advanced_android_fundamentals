@@ -487,14 +487,14 @@ public final class R {
         public static final int notification_subtext_size = 0x7f050065;
         public static final int notification_top_pad = 0x7f050066;
         public static final int notification_top_pad_large_text = 0x7f050067;
-        public static final int tooltip_corner_radius = 0x7f050068;
-        public static final int tooltip_horizontal_padding = 0x7f050069;
-        public static final int tooltip_margin = 0x7f05006a;
-        public static final int tooltip_precise_anchor_extra_offset = 0x7f05006b;
-        public static final int tooltip_precise_anchor_threshold = 0x7f05006c;
-        public static final int tooltip_vertical_padding = 0x7f05006d;
-        public static final int tooltip_y_offset_non_touch = 0x7f05006e;
-        public static final int tooltip_y_offset_touch = 0x7f05006f;
+        public static final int tooltip_corner_radius = 0x7f050069;
+        public static final int tooltip_horizontal_padding = 0x7f05006a;
+        public static final int tooltip_margin = 0x7f05006b;
+        public static final int tooltip_precise_anchor_extra_offset = 0x7f05006c;
+        public static final int tooltip_precise_anchor_threshold = 0x7f05006d;
+        public static final int tooltip_vertical_padding = 0x7f05006e;
+        public static final int tooltip_y_offset_non_touch = 0x7f05006f;
+        public static final int tooltip_y_offset_touch = 0x7f050070;
     }
     public static final class drawable {
         private drawable() {}
@@ -594,8 +594,8 @@ public final class R {
         public static final int notification_template_icon_low_bg = 0x7f06005c;
         public static final int notification_tile_bg = 0x7f06005d;
         public static final int notify_panel_notification_icon_bg = 0x7f06005e;
-        public static final int tooltip_frame_dark = 0x7f06005f;
-        public static final int tooltip_frame_light = 0x7f060060;
+        public static final int tooltip_frame_dark = 0x7f060060;
+        public static final int tooltip_frame_light = 0x7f060061;
     }
     public static final class id {
         private id() {}
@@ -680,25 +680,25 @@ public final class R {
         public static final int shortcut = 0x7f070066;
         public static final int spacer = 0x7f07006a;
         public static final int split_action_bar = 0x7f07006b;
-        public static final int src_atop = 0x7f07006e;
-        public static final int src_in = 0x7f07006f;
-        public static final int src_over = 0x7f070070;
-        public static final int status_bar_latest_event_content = 0x7f070071;
-        public static final int submenuarrow = 0x7f070072;
-        public static final int submit_area = 0x7f070073;
-        public static final int tabMode = 0x7f070074;
-        public static final int text = 0x7f070075;
-        public static final int text2 = 0x7f070076;
-        public static final int textSpacerNoButtons = 0x7f070077;
-        public static final int textSpacerNoTitle = 0x7f070078;
-        public static final int time = 0x7f070079;
-        public static final int title = 0x7f07007a;
-        public static final int titleDividerNoCustom = 0x7f07007b;
-        public static final int title_template = 0x7f07007c;
-        public static final int topPanel = 0x7f07007e;
-        public static final int uniform = 0x7f07007f;
-        public static final int up = 0x7f070080;
-        public static final int wrap_content = 0x7f070087;
+        public static final int src_atop = 0x7f070072;
+        public static final int src_in = 0x7f070073;
+        public static final int src_over = 0x7f070074;
+        public static final int status_bar_latest_event_content = 0x7f070075;
+        public static final int submenuarrow = 0x7f070076;
+        public static final int submit_area = 0x7f070077;
+        public static final int tabMode = 0x7f070078;
+        public static final int text = 0x7f070079;
+        public static final int text2 = 0x7f07007a;
+        public static final int textSpacerNoButtons = 0x7f07007b;
+        public static final int textSpacerNoTitle = 0x7f07007c;
+        public static final int time = 0x7f07007d;
+        public static final int title = 0x7f07007e;
+        public static final int titleDividerNoCustom = 0x7f07007f;
+        public static final int title_template = 0x7f070080;
+        public static final int topPanel = 0x7f070082;
+        public static final int uniform = 0x7f070083;
+        public static final int up = 0x7f070084;
+        public static final int wrap_content = 0x7f07008b;
     }
     public static final class integer {
         private integer() {}
