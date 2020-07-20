@@ -78,6 +78,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 getWindow().getDecorView().setBackgroundColor(Color.rgb(newValue, newValue, newValue));
                 break;
             case Sensor.TYPE_PROXIMITY:
+
+
+                mIcon.getLayoutParams().width = (int)sensorValue * 25;
                 mTextSensorProximity.setText(getResources().getString(R.string.label_proximity,
                         sensorValue));
             default:
