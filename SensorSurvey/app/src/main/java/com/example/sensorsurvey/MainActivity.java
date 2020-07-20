@@ -2,11 +2,14 @@ package com.example.sensorsurvey;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -19,6 +22,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     private TextView mTextSensorLight;
     private TextView mTextSensorProximity;
+    private ImageView mIcon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         mTextSensorLight = findViewById(R.id.label_light);
         mTextSensorProximity = findViewById(R.id.label_proximity);
+        mIcon = findViewById(R.id.icon);
 
         mLightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         mProximitySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
@@ -66,10 +71,15 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
         switch (sensorType) {
             case Sensor.TYPE_LIGHT:
-                    mTextSensorLight.setText(getResources().getString(R.string.label_light, sensorValue));
+                mTextSensorLight.setText(getResources().getString(R.string.label_light,
+                        sensorValue));
+                float maxValue = mLightSensor.getMaximumRange();
+                int newValue = (int) (255f * sensorValue / maxValue);
+                getWindow().getDecorView().setBackgroundColor(Color.rgb(newValue, newValue, newValue));
                 break;
-            case  Sensor.TYPE_PROXIMITY:
-                mTextSensorProximity.setText(getResources().getString(R.string.label_proximity, sensorValue));
+            case Sensor.TYPE_PROXIMITY:
+                mTextSensorProximity.setText(getResources().getString(R.string.label_proximity,
+                        sensorValue));
             default:
                 break;
         }
