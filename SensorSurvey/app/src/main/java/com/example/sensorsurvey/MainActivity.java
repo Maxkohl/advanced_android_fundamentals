@@ -12,6 +12,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private SensorManager mSensorManager;
+    private Sensor mLightSensor;
+    private Sensor mProximitySensor;
+
+    private TextView mTextSensorLight;
+    private TextView mTextSensorProximity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,14 +24,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         mSensorManager = (SensorManager)getSystemService(SENSOR_SERVICE);
 
-        List<Sensor> sensorList = mSensorManager.getSensorList(Sensor.TYPE_ALL);
-        StringBuilder sensorText = new StringBuilder();
-        for (Sensor current : sensorList) {
-            sensorText.append(current.getName()).append(System.getProperty("line.separator"));
+        mTextSensorLight = findViewById(R.id.label_light);
+        mTextSensorProximity = findViewById(R.id.label_proximity);
+
+        mLightSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        mProximitySensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+
+        String sensor_error = getResources().getString(R.string.error_no_sensor);
+        if (mLightSensor == null) {
+            mTextSensorLight.setText(sensor_error);
         }
-
-        TextView sensorTextView = (TextView)findViewById(R.id.sensor_list);
-        sensorTextView.setText(sensorText);
-
+        if (mProximitySensor == null) {
+            mTextSensorProximity.setText(sensor_error);
+        }
     }
 }
