@@ -6,12 +6,12 @@
     android:layout_height="match_parent"
     android:layout_width="match_parent"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/dino1"
-        android:text="Click to switch Image"
-        android:onClick="changeImage"
-        />
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dino1"
+    android:text="Click to switch Image"
+    android:onClick="changeImage"
+    />
 
 </LinearLayout>
