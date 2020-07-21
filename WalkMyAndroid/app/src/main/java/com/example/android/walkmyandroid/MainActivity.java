@@ -32,7 +32,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
     private AnimatorSet mRotateAnim;
 
     private boolean mTrackingLocation = false;
+    private LocationCallback mLocationCallback;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +74,12 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
         mAndroidImageView = findViewById(R.id.imageview_android);
         mRotateAnim = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.rotate);
 
-
+        mLocationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+            }
+        };
     }
 
     public void startTrackingLocation() {
@@ -80,16 +88,18 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_LOCATION_PERMISSION);
         } else {
-            mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
-                @Override
-                public void onSuccess(Location location) {
-                    if (location != null) {
-                        new FetchAddressTask(MainActivity.this, MainActivity.this).execute(location);
-                    } else {
-                        mLocationTextView.setText(R.string.no_location);
-                    }
-                }
-            });
+            mFusedLocationClient.requestLocationUpdates(getLocationRequest(), mLocationCallback, null);
+            //This is for getting last location. Replaced by above for constant location updates.
+//            mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+//                @Override
+//                public void onSuccess(Location location) {
+//                    if (location != null) {
+//                        new FetchAddressTask(MainActivity.this, MainActivity.this).execute(location);
+//                    } else {
+//                        mLocationTextView.setText(R.string.no_location);
+//                    }
+//                }
+//            });
         }
         mLocationTextView.setText(getString(R.string.address_text,
                 getString(R.string.loading),
@@ -105,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
             mRotateAnim.end();
             mTrackingLocation = false;
             mLocationButton.setText(R.string.get_location);
+            mFusedLocationClient.removeLocationUpdates(mLocationCallback);
         }
     }
 
