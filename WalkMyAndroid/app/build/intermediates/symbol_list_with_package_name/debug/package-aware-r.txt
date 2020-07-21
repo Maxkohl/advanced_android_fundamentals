@@ -959,6 +959,7 @@ string no_location
 string search_menu_title
 string service_not_available
 string status_bar_notification_info_overflow
+string stop_tracking_location
 string textview_hint
 style AlertDialog_AppCompat
 style AlertDialog_AppCompat_Light

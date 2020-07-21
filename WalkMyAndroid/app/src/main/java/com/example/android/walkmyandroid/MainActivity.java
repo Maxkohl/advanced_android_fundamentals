@@ -38,7 +38,7 @@ import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
-public class MainActivity extends AppCompatActivity implements FetchAddressTask.OnTaskCompleted{
+public class MainActivity extends AppCompatActivity implements FetchAddressTask.OnTaskCompleted {
 
     private Button mLocationButton;
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -78,6 +78,10 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
             @Override
             public void onLocationResult(LocationResult locationResult) {
                 super.onLocationResult(locationResult);
+                if (mTrackingLocation) {
+                    //if Tracking is true, reverse geocode into address
+                    new FetchAddressTask(MainActivity.this, MainActivity.this).execute(locationResult.getLastLocation());
+                }
             }
         };
     }
@@ -88,13 +92,16 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_LOCATION_PERMISSION);
         } else {
-            mFusedLocationClient.requestLocationUpdates(getLocationRequest(), mLocationCallback, null);
+            mFusedLocationClient.requestLocationUpdates(getLocationRequest(), mLocationCallback,
+                    null);
             //This is for getting last location. Replaced by above for constant location updates.
-//            mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+//            mFusedLocationClient.getLastLocation().addOnSuccessListener(new
+//            OnSuccessListener<Location>() {
 //                @Override
 //                public void onSuccess(Location location) {
 //                    if (location != null) {
-//                        new FetchAddressTask(MainActivity.this, MainActivity.this).execute(location);
+//                        new FetchAddressTask(MainActivity.this, MainActivity.this).execute
+//                        (location);
 //                    } else {
 //                        mLocationTextView.setText(R.string.no_location);
 //                    }
@@ -136,8 +143,10 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
 
     @Override
     public void onTaskCompleted(String result) {
-        mLocationTextView.setText(getString(R.string.address_text,
-                result, System.currentTimeMillis()));
+        if (mTrackingLocation) {
+            mLocationTextView.setText(getString(R.string.address_text,
+                    result, System.currentTimeMillis()));
+        }
     }
 
     public LocationRequest getLocationRequest() {
