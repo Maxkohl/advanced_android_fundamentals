@@ -18,8 +18,11 @@ public class FetchAddressTask extends AsyncTask<Location, Void, String> {
     private Context context;
     private static final String TAG = FetchAddressTask.class.getSimpleName();
 
-    public FetchAddressTask(Context context) {
+    private OnTaskCompleted mListener;
+
+    public FetchAddressTask(Context context, OnTaskCompleted listener) {
         this.context = context;
+        mListener = listener;
     }
 
     @Override
@@ -57,5 +60,9 @@ public class FetchAddressTask extends AsyncTask<Location, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
+    }
+
+    interface  OnTaskCompleted {
+        void onTaskCompleted(String result);
     }
 }
