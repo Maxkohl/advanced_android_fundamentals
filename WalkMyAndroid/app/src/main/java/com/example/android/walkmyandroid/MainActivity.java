@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
         mLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (mTrackingLocation) {
+                if (!mTrackingLocation) {
                     startTrackingLocation();
                 } else {
                     stopTrackingLocation();
@@ -93,10 +93,18 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
         mLocationTextView.setText(getString(R.string.address_text,
                 getString(R.string.loading),
                 System.currentTimeMillis()));
+
+        mRotateAnim.start();
+        mTrackingLocation = true;
+        mLocationButton.setText(R.string.stop_tracking_location);
     }
 
     private void stopTrackingLocation() {
-
+        if (mTrackingLocation) {
+            mRotateAnim.end();
+            mTrackingLocation = false;
+            mLocationButton.setText(R.string.get_location);
+        }
     }
 
     @Override
