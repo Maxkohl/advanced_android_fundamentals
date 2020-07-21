@@ -28,10 +28,19 @@ public class FetchAddressTask extends AsyncTask<Location, Void, String> {
         String resultMessage = "";
         try {
             addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(),1);
+            if (addresses == null || addresses.size() == 0) {
+                if (resultMessage.isEmpty()) {
+                    resultMessage = context.getString(R.string.address_not_found);
+                    Log.e(TAG, resultMessage);
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
             resultMessage = context.getString(R.string.service_not_available);
             Log.e(TAG, resultMessage, e);
+        } catch (IllegalArgumentException iAE) {
+            resultMessage = context.getString(R.string.invalid_lat_long);
+            Log.e(TAG, resultMessage, iAE);
         }
         return null;
     }
