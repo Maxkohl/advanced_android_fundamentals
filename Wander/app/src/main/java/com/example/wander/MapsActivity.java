@@ -14,7 +14,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PointOfInterest;
 
 import java.util.Locale;
 
@@ -51,6 +53,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.addMarker(new MarkerOptions().position(home).title("Home Marker"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home, zoom));
         setMapLongClick(mMap);
+        setPoiClick(mMap);
     }
 
     @Override
@@ -90,6 +93,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         latLng.longitude);
 
                 map.addMarker(new MarkerOptions().position(latLng).title(getString(R.string.dropped_pin)).snippet(snippet));
+            }
+        });
+    }
+
+    private void setPoiClick(final GoogleMap map) {
+        map.setOnPoiClickListener(new GoogleMap.OnPoiClickListener() {
+            @Override
+            public void onPoiClick(PointOfInterest pointOfInterest) {
+                Marker poiMarker =
+                        mMap.addMarker(new MarkerOptions().position(pointOfInterest.latLng).title(pointOfInterest.name));
+                poiMarker.showInfoWindow();
             }
         });
     }
