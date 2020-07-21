@@ -21,19 +21,27 @@ import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.location.Location;
 import android.media.audiofx.DynamicsProcessing;
 import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 
 public class MainActivity extends AppCompatActivity {
 
     private Button mLocationButton;
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private TextView mLocationTextView;
+    private Location mLocation;
+    private FusedLocationProviderClient mFusedLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,9 @@ public class MainActivity extends AppCompatActivity {
                 getLocation();
             }
         });
+
+        mLocationTextView = findViewById(R.id.button_location);
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
 
     }
