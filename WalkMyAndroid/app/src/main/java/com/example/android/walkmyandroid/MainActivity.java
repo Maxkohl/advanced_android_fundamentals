@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_LOCATION_PERMISSION = 1;
     private TextView mLocationTextView;
-    private Location mLocation;
+    private Location mLastLocation;
     private FusedLocationProviderClient mFusedLocationClient;
 
     @Override
@@ -48,17 +49,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        mLocationTextView = findViewById(R.id.textview_location);
         mLocationButton = findViewById(R.id.button_location);
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         mLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getLocation();
             }
         });
-
-        mLocationTextView = findViewById(R.id.button_location);
-        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
 
     }
 
@@ -68,7 +67,20 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_LOCATION_PERMISSION);
         } else {
-            Log.d(TAG, "getLocation: permission granted");
+            mFusedLocationClient.getLastLocation().addOnSuccessListener(new OnSuccessListener<Location>() {
+                @Override
+                public void onSuccess(Location location) {
+                    if (location != null) {
+                        mLastLocation = location;
+                        mLocationTextView.setText(
+                                getString(R.string.location_text, mLastLocation.getLatitude(),
+                                        mLastLocation.getLongitude(), mLastLocation.getTime())
+                        );
+                    } else {
+                        mLocationTextView.setText(R.string.no_location);
+                    }
+                }
+            });
         }
     }
 
