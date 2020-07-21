@@ -1,3 +1,5 @@
+package com.example.android.walkmyandroid;
+
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
@@ -5,8 +7,6 @@ import android.location.Location;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.util.Log;
-
-import com.example.android.walkmyandroid.R;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class FetchAddressTask extends AsyncTask<Location, Void, String> {
             } else {
                 Address address = addresses.get(0);
                 ArrayList<String> addressParts = new ArrayList<>();
-                for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+                for (int i = 0; i <= address.getMaxAddressLineIndex(); i++) {
                     addressParts.add(address.getAddressLine(i));
                 }
                 resultMessage = TextUtils.join("\n", addressParts);
@@ -58,8 +58,9 @@ public class FetchAddressTask extends AsyncTask<Location, Void, String> {
     }
 
     @Override
-    protected void onPostExecute(String s) {
-        super.onPostExecute(s);
+    protected void onPostExecute(String address) {
+        super.onPostExecute(address);
+        mListener.onTaskCompleted(address);
     }
 
     interface  OnTaskCompleted {
