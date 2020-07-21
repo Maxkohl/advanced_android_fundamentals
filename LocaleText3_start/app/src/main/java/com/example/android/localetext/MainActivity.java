@@ -118,14 +118,17 @@ public class MainActivity extends AppCompatActivity {
                         // Don't format, leave alone.
                     } else {
 
-                        // TODO: Parse string in view v to a number.
+
                         try {
                             mInputQuantity = mNumFormat.parse(v.getText().toString()).intValue();
                         } catch (ParseException e) {
                             e.printStackTrace();
                             v.setError(getText(R.string.enter_number));
-                            return false; 
+                            return false;
                         }
+
+                        String myFormattedQuantity = mNumFormat.format(mInputQuantity);
+                        v.setText(myFormattedQuantity);
 
                         // TODO: Convert to string using locale's number format.
 
