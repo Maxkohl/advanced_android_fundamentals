@@ -156,4 +156,21 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
         locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         return locationRequest;
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mTrackingLocation) {
+            startTrackingLocation();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mTrackingLocation) {
+            stopTrackingLocation();
+            mTrackingLocation = true;
+        }
+    }
 }
