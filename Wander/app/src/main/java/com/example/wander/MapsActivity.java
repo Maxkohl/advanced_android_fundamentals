@@ -48,6 +48,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         float zoom = 15;
         mMap.addMarker(new MarkerOptions().position(home).title("Home Marker"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home, zoom));
+        setMapLongClick(mMap);
     }
 
     @Override
@@ -75,5 +76,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void setMapLongClick(final GoogleMap map) {
+        map.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+            @Override
+            public void onMapLongClick(LatLng latLng) {
+                map.addMarker(new MarkerOptions().position(latLng));
+            }
+        });
     }
 }
