@@ -3,11 +3,13 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.AsyncTask;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.example.android.walkmyandroid.R;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -33,6 +35,13 @@ public class FetchAddressTask extends AsyncTask<Location, Void, String> {
                     resultMessage = context.getString(R.string.address_not_found);
                     Log.e(TAG, resultMessage);
                 }
+            } else {
+                Address address = addresses.get(0);
+                ArrayList<String> addressParts = new ArrayList<>();
+                for (int i = 0; i < address.getMaxAddressLineIndex(); i++) {
+                    addressParts.add(address.getAddressLine(i));
+                }
+                resultMessage = TextUtils.join("\n", addressParts);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,7 +51,7 @@ public class FetchAddressTask extends AsyncTask<Location, Void, String> {
             resultMessage = context.getString(R.string.invalid_lat_long);
             Log.e(TAG, resultMessage, iAE);
         }
-        return null;
+        return resultMessage;
     }
 
     @Override
