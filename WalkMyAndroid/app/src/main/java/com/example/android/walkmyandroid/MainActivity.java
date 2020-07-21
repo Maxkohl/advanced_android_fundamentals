@@ -24,10 +24,7 @@ import android.animation.AnimatorInflater;
 import android.animation.AnimatorSet;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.media.audiofx.DynamicsProcessing;
-import android.nfc.Tag;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -60,17 +57,17 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
         mLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getLocation();
+                startTrackingLocation();
             }
         });
 
         mAndroidImageView = findViewById(R.id.imageview_android);
         mRotateAnim = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.rotate);
-        
+
 
     }
 
-    public void getLocation() {
+    public void startTrackingLocation() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
@@ -99,7 +96,7 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
         switch (requestCode) {
             case REQUEST_LOCATION_PERMISSION:
                 if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getLocation();
+                    startTrackingLocation();
                 } else {
                     Toast.makeText(this, R.string.location_permission_denied, Toast.LENGTH_SHORT).show();
                 }
