@@ -1,11 +1,13 @@
 package com.example.wander;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -52,5 +54,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         MenuInflater menuInflater = getMenuInflater();
         menuInflater.inflate(R.menu.map_options, menu);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())  {
+            case R.id.normal_map:
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                return true;
+
+        }
     }
 }
