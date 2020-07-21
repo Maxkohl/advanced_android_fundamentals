@@ -38,6 +38,7 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -48,10 +49,10 @@ public class MainActivity extends AppCompatActivity {
 
     // Default quantity is 1.
     private int mInputQuantity = 1;
-
-    // TODO: Get the number format for this locale.
     private NumberFormat mNumFormat = NumberFormat.getInstance();
     private static final String TAG = MainActivity.class.getSimpleName();
+
+    private NumberFormat mCurrencyFormat = NumberFormat.getCurrencyInstance();
 
     // Fixed price in U.S. dollars and cents: ten cents.
     private double mPrice = 0.10;
@@ -95,9 +96,25 @@ public class MainActivity extends AppCompatActivity {
         expirationDateView.setText(myFormattedDate);
 
 
-
-
         // TODO: Apply the exchange rate and calculate the price.
+        String mFormattedPrice;
+        String deviceLocale = Locale.getDefault().getCountry();
+
+        if (deviceLocale.equals("FR") || deviceLocale.equals("IL")) {
+            if (deviceLocale.equals("FR")) {
+                mPrice *= mFrExchangeRate;
+            } else {
+                mPrice *= mIwExchangeRate;
+            }
+
+            mFormattedPrice = mCurrencyFormat.format(mPrice);
+        } else {
+            mCurrencyFormat = NumberFormat.getCurrencyInstance(Locale.US);
+            mFormattedPrice = mCurrencyFormat.format(mPrice);
+        }
+
+        TextView localePrice = findViewById(R.id.price);
+        localePrice.setText(mFormattedPrice);
 
         // TODO: Show the price string.
 
@@ -117,8 +134,6 @@ public class MainActivity extends AppCompatActivity {
                     if (v.toString().equals("")) {
                         // Don't format, leave alone.
                     } else {
-
-
                         try {
                             mInputQuantity = mNumFormat.parse(v.getText().toString()).intValue();
                         } catch (ParseException e) {
@@ -168,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Creates the options menu and returns true.
      *
-     * @param menu       Options menu
+     * @param menu Options menu
      * @return boolean   True after creating options menu.
      */
     @Override
@@ -181,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Handles options menu item clicks.
      *
-     * @param item      Menu item
+     * @param item Menu item
      * @return boolean  True if menu item is selected.
      */
     @Override
