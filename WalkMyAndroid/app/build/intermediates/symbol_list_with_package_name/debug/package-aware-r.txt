@@ -1492,6 +1492,7 @@ string abc_shareactionprovider_share_with_application
 string abc_toolbar_collapse_description
 string address_not_found
 string address_text
+string address_text_places
 string android_image
 string app_name
 string common_google_play_services_enable_button

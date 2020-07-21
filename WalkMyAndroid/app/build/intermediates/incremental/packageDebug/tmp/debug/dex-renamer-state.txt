@@ -1,4 +1,4 @@
-#Tue Jul 21 15:48:21 EDT 2020
+#Tue Jul 21 16:08:51 EDT 2020
 base.0=C\:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\build\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 path.0=classes.dex
 renamed.0=classes.dex

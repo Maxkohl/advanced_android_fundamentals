@@ -41,7 +41,9 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.libraries.places.compat.Place;
 import com.google.android.libraries.places.compat.PlaceDetectionClient;
+import com.google.android.libraries.places.compat.PlaceLikelihood;
 import com.google.android.libraries.places.compat.PlaceLikelihoodBuffer;
 import com.google.android.libraries.places.compat.PlaceLikelihoodBufferResponse;
 import com.google.android.libraries.places.compat.Places;
@@ -130,8 +132,9 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
 //            });
         }
         mLocationTextView.setText(getString(R.string.address_text,
-                getString(R.string.loading),
-                getString(R.string.loading), new Date()));
+                getString(R.string.loading),// Name
+                getString(R.string.loading),// Address
+                new Date())); // Timestamp
 
         mRotateAnim.start();
         mTrackingLocation = true;
@@ -163,10 +166,8 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
     }
 
     @Override
-    public void onTaskCompleted(String result) {
+    public void onTaskCompleted(final String result) {
         if (mTrackingLocation) {
-            mLocationTextView.setText(getString(R.string.address_text,
-                    result, System.currentTimeMillis()));
             if (ActivityCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                 // TODO: Consider calling
@@ -184,12 +185,28 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
                 @Override
                 public void onComplete(@NonNull Task<PlaceLikelihoodBufferResponse> task) {
                     if (task.isSuccessful()) {
-
+                        PlaceLikelihoodBufferResponse likelyPlaces = task.getResult();
+                        float maxLikelihood = 0;
+                        Place currentPlace = null;
+                        for (PlaceLikelihood placeLikelihood : likelyPlaces) {
+                            if (maxLikelihood < placeLikelihood.getLikelihood()) {
+                                maxLikelihood = placeLikelihood.getLikelihood();
+                                currentPlace = placeLikelihood.getPlace();
+                            }
+                        }
+                        if (currentPlace != null) {
+                            mLocationTextView.setText(getString(R.string.address_text_places,
+                                    currentPlace.getName(), result, System.currentTimeMillis()));
+                        }
+                        likelyPlaces.release();
                     } else {
-                        
+                        mLocationTextView.setText(
+                                getString(R.string.address_text,
+                                        "No Place name found!",
+                                        result, System.currentTimeMillis()));
                     }
                 }
-            })
+            });
         }
     }
 
