@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.animation.AnimatorInflater;
+import android.animation.AnimatorSet;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.media.audiofx.DynamicsProcessing;
@@ -28,6 +30,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
     private TextView mLocationTextView;
     private FusedLocationProviderClient mFusedLocationClient;
 
+    private ImageView mAndroidImageView;
+    private AnimatorSet mRotateAnim;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +63,10 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
                 getLocation();
             }
         });
+
+        mAndroidImageView = findViewById(R.id.imageview_android);
+        mRotateAnim = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.rotate);
+        
 
     }
 
