@@ -18,9 +18,11 @@ package com.example.android.localetext;
 
 import android.content.Context;
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -32,6 +34,9 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
@@ -45,6 +50,8 @@ public class MainActivity extends AppCompatActivity {
     private int mInputQuantity = 1;
 
     // TODO: Get the number format for this locale.
+    private NumberFormat mNumFormat = NumberFormat.getInstance();
+    private static final String TAG = MainActivity.class.getSimpleName();
 
     // Fixed price in U.S. dollars and cents: ten cents.
     private double mPrice = 0.10;
@@ -83,7 +90,12 @@ public class MainActivity extends AppCompatActivity {
         // Set the expiration date as the date to display.
         myDate.setTime(expirationDate);
 
-        // TODO: Format the date for the locale.
+        String myFormattedDate = DateFormat.getDateInstance().format(myDate);
+        TextView expirationDateView = findViewById(R.id.date);
+        expirationDateView.setText(myFormattedDate);
+
+
+
 
         // TODO: Apply the exchange rate and calculate the price.
 
@@ -107,6 +119,13 @@ public class MainActivity extends AppCompatActivity {
                     } else {
 
                         // TODO: Parse string in view v to a number.
+                        try {
+                            mInputQuantity = mNumFormat.parse(v.getText().toString()).intValue();
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                            v.setError(getText(R.string.enter_number));
+                            return false; 
+                        }
 
                         // TODO: Convert to string using locale's number format.
 
