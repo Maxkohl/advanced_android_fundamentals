@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-36:12
-INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-36:12
-INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-36:12
-INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-36:12
+ADDED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-37:12
+INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-37:12
+INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-37:12
+INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-37:12
 MERGED from [androidx.appcompat:appcompat:1.0.0] C:\Users\Max_K\.gradle\caches\transforms-2\files-2.1\4458c9c05cd1e45f3462845bbb5f6a7c\appcompat-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] C:\Users\Max_K\.gradle\caches\transforms-2\files-2.1\75baa063235eedb7ab2cc635bdb88d73\constraintlayout-1.1.3\AndroidManifest.xml:2:1-11:12
 MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Max_K\.gradle\caches\transforms-2\files-2.1\9fc19bc18885249ef1a460bfbf368363\play-services-location-17.0.0\AndroidManifest.xml:2:1-9:12
@@ -36,20 +36,20 @@ MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Max_K\.gradle
 MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Max_K\.gradle\caches\transforms-2\files-2.1\7282e00d74c6a6acf53f4bfd68421266\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Max_K\.gradle\caches\transforms-2\files-2.1\73114719268a97e9fd391905563b2ee9\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Max_K\.gradle\caches\transforms-2\files-2.1\bcf856ddfeb04b3b73ed182739910d39\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
-INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-36:12
-INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-36:12
-INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-36:12
+INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-37:12
+INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-37:12
+INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-37:12
 	package
 		ADDED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:17:5-48
 		INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml
 		INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-36:12
+		ADDED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-37:12
 		INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml
 	android:versionCode
 		INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-36:12
+		ADDED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:1-37:12
 		INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:16:11-69
@@ -99,6 +99,10 @@ category#android.intent.category.LAUNCHER
 ADDED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:30:17-77
 	android:name
 		ADDED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:30:27-74
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:35:5-78
+	android:name
+		ADDED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml:35:22-76
 uses-sdk
 INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Max_K\Development\advanced_android_fundamentals\WalkMyAndroid\app\src\main\AndroidManifest.xml
