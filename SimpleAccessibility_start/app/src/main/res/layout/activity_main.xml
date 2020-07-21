@@ -89,12 +89,12 @@ limitations under the License. -->
         android:text="Message"
         app:layout_constraintLeft_toLeftOf="@id/checkbox_hyperspace"
         app:layout_constraintTop_toBottomOf="@id/image_partly_cloudy"
+        android:labelFor="@id/edittext_message"
         />
     <EditText
         android:id="@+id/edittext_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter your message"
         app:layout_constraintLeft_toLeftOf="@id/checkbox_hyperspace"
         app:layout_constraintTop_toBottomOf="@id/message_label"
         />
