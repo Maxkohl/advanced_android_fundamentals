@@ -27,7 +27,7 @@
     <string name="invalid_lat_long"><![CDATA[Invalid lat & long used]]></string>
     <string name="address_not_found">Address not found</string>
 
-    <string name="address_text">"Address: %1$s \n Timestamp: %2$tr"</string>
     <string name="loading">Loading...</string>
     <string name="stop_tracking_location">Stop Tracking Location</string>
+    <string name="address_text">"Name: %1$s \n Address: %2$s \n Timestamp: %3$tr"</string>
 </resources>

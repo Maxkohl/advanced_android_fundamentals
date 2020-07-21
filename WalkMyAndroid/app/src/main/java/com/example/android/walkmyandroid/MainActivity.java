@@ -38,8 +38,16 @@ import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.compat.PlaceDetectionClient;
+import com.google.android.libraries.places.compat.PlaceLikelihoodBuffer;
+import com.google.android.libraries.places.compat.PlaceLikelihoodBufferResponse;
+import com.google.android.libraries.places.compat.Places;
+
+import java.util.Date;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements FetchAddressTask.OnTaskCompleted {
 
@@ -58,6 +66,7 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
     private PlaceDetectionClient mPlaceDetectionClient;
 
     private static final String TRACKING_LOCATION_KEY = "trackingLocation";
+    private String mLastPlaceName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
 
         mAndroidImageView = findViewById(R.id.imageview_android);
         mRotateAnim = (AnimatorSet) AnimatorInflater.loadAnimator(this, R.animator.rotate);
+        mPlaceDetectionClient = Places.getPlaceDetectionClient(this, null);
 
         mLocationCallback = new LocationCallback() {
             @Override
@@ -121,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
         }
         mLocationTextView.setText(getString(R.string.address_text,
                 getString(R.string.loading),
-                System.currentTimeMillis()));
+                getString(R.string.loading), new Date()));
 
         mRotateAnim.start();
         mTrackingLocation = true;
@@ -157,6 +167,29 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
         if (mTrackingLocation) {
             mLocationTextView.setText(getString(R.string.address_text,
                     result, System.currentTimeMillis()));
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
+            Task<PlaceLikelihoodBufferResponse> placeResult =
+                    mPlaceDetectionClient.getCurrentPlace(null);
+            placeResult.addOnCompleteListener(new OnCompleteListener<PlaceLikelihoodBufferResponse>() {
+                @Override
+                public void onComplete(@NonNull Task<PlaceLikelihoodBufferResponse> task) {
+                    if (task.isSuccessful()) {
+
+                    } else {
+                        
+                    }
+                }
+            })
         }
     }
 

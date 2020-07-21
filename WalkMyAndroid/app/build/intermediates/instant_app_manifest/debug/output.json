@@ -21,7 +21,7 @@
       "properties": {
         "packageId": "com.example.android.walkmyandroid",
         "split": "",
-        "minSdkVersion": "15"
+        "minSdkVersion": "16"
       }
     }
   ]
