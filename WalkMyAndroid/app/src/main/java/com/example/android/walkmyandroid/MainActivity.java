@@ -16,6 +16,7 @@
 package com.example.android.walkmyandroid;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -25,6 +26,7 @@ import android.animation.AnimatorSet;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -52,10 +54,16 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
     private boolean mTrackingLocation = false;
     private LocationCallback mLocationCallback;
 
+    private static final String TRACKING_LOCATION_KEY = "trackingLocation";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if (savedInstanceState != null) {
+            mTrackingLocation = savedInstanceState.getBoolean(TRACKING_LOCATION_KEY);
+        }
 
         mLocationTextView = findViewById(R.id.textview_location);
         mLocationButton = findViewById(R.id.button_location);
@@ -172,5 +180,11 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
             stopTrackingLocation();
             mTrackingLocation = true;
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putBoolean(TRACKING_LOCATION_KEY, mTrackingLocation);
+        super.onSaveInstanceState(outState);
     }
 }
