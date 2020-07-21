@@ -39,6 +39,7 @@ import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.libraries.places.compat.PlaceDetectionClient;
 
 public class MainActivity extends AppCompatActivity implements FetchAddressTask.OnTaskCompleted {
 
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
 
     private boolean mTrackingLocation = false;
     private LocationCallback mLocationCallback;
+
+    private PlaceDetectionClient mPlaceDetectionClient;
 
     private static final String TRACKING_LOCATION_KEY = "trackingLocation";
 
