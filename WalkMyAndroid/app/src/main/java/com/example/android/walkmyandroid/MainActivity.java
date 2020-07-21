@@ -197,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
                         if (currentPlace != null) {
                             mLocationTextView.setText(getString(R.string.address_text_places,
                                     currentPlace.getName(), result, System.currentTimeMillis()));
+                            setAndroidType(currentPlace);
                         }
                         likelyPlaces.release();
                     } else {
@@ -208,6 +209,29 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
                 }
             });
         }
+    }
+    private void setAndroidType(Place currentPlace) {
+        int drawableID = -1;
+        for (Integer placeType : currentPlace.getPlaceTypes()) {
+            switch (placeType) {
+                case Place.TYPE_SCHOOL:
+                    drawableID = R.drawable.android_school;
+                    break;
+                case Place.TYPE_GYM:
+                    drawableID = R.drawable.android_gym;
+                    break;
+                case Place.TYPE_RESTAURANT:
+                    drawableID = R.drawable.android_restaurant;
+                    break;
+                case Place.TYPE_LIBRARY:
+                    drawableID = R.drawable.android_library;
+                    break;
+            }
+        }
+        if (drawableID < 0) {
+            drawableID = R.drawable.android_plain;
+        }
+        mAndroidImageView.setImageResource(drawableID);
     }
 
     public LocationRequest getLocationRequest() {

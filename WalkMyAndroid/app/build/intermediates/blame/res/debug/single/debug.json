@@ -1,19 +1,31 @@
 [
     {
+        "merged": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable_android_restaurant.jpg.flat",
+        "source": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\src\\main\\res\\drawable\\android_restaurant.jpg"
+    },
+    {
         "merged": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher_round.png"
     },
     {
-        "merged": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
-        "source": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+        "merged": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable_android_gym.jpg.flat",
+        "source": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\src\\main\\res\\drawable\\android_gym.jpg"
     },
     {
         "merged": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\build\\intermediates\\res\\merged\\debug\\animator_rotate.xml.flat",
         "source": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\src\\main\\res\\animator\\rotate.xml"
     },
     {
+        "merged": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xhdpi_ic_launcher_round.png.flat",
+        "source": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher_round.png"
+    },
+    {
         "merged": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher.png.flat",
         "source": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\src\\main\\res\\mipmap-xxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable_android_school.jpg.flat",
+        "source": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\src\\main\\res\\drawable\\android_school.jpg"
     },
     {
         "merged": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
@@ -46,6 +58,10 @@
     {
         "merged": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-mdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\src\\main\\res\\mipmap-mdpi\\ic_launcher_round.png"
+    },
+    {
+        "merged": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\build\\intermediates\\res\\merged\\debug\\drawable_android_library.jpg.flat",
+        "source": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\src\\main\\res\\drawable\\android_library.jpg"
     },
     {
         "merged": "C:\\Users\\Max_K\\Development\\advanced_android_fundamentals\\WalkMyAndroid\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher.png.flat",
