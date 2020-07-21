@@ -1224,6 +1224,7 @@ id blocking
 id bottom
 id buttonPanel
 id button_location
+id button_pick_place
 id center
 id center_horizontal
 id center_vertical
@@ -1523,6 +1524,7 @@ string loading
 string location_permission_denied
 string location_text
 string no_location
+string pick_a_place
 string place_autocomplete_clear_button
 string place_autocomplete_search_hint
 string places_autocomplete_clear_button

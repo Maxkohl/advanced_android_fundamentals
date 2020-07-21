@@ -33,11 +33,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.places.ui.PlacePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -54,8 +57,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements FetchAddressTask.OnTaskCompleted {
 
     private Button mLocationButton;
+    private Button mPickPlaceButton;
     private static final String TAG = MainActivity.class.getSimpleName();
     private static final int REQUEST_LOCATION_PERMISSION = 1;
+    private static final int REQUEST_PICK_PLACE = 2;
     private TextView mLocationTextView;
     private FusedLocationProviderClient mFusedLocationClient;
 
@@ -81,6 +86,7 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
 
         mLocationTextView = findViewById(R.id.textview_location);
         mLocationButton = findViewById(R.id.button_location);
+        mPickPlaceButton = findViewById(R.id.button_pick_place);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         mLocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +95,19 @@ public class MainActivity extends AppCompatActivity implements FetchAddressTask.
                     startTrackingLocation();
                 } else {
                     stopTrackingLocation();
+                }
+            }
+        });
+
+        mPickPlaceButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
+                try {
+                    startActivityForResult(builder.build(MainActivity.this), REQUEST_PICK_PLACE);
+                } catch (GooglePlayServicesRepairableException | GooglePlayServicesNotAvailableException e) {
+                    e.printStackTrace();
                 }
             }
         });
