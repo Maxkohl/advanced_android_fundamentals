@@ -31,4 +31,5 @@
     <string name="loading">Loading...</string>
     <string name="stop_tracking_location">Stop Tracking Location</string>
     <string name="address_text_places">"Name: %1$s \n Address: %2$s \n Timestamp: %3$tr"</string>
+    <string name="pick_a_place">Pick a Place</string>
 </resources>
