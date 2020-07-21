@@ -44,9 +44,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng home = new LatLng(39.956187, -83.001027);
+        float zoom = 15;
+        mMap.addMarker(new MarkerOptions().position(home).title("Home Marker"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home, zoom));
     }
 
     @Override
@@ -62,7 +63,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             case R.id.normal_map:
                 mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                 return true;
-
+            case R.id.hybrid_map:
+                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                return true;
+            case R.id.satellite_map:
+                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                return true;
+            case R.id.terrain_map:
+                mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
