@@ -15,6 +15,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
@@ -56,8 +57,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         float zoom = 15;
         mMap.addMarker(new MarkerOptions().position(home).title("Home Marker"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home, zoom));
+        GroundOverlayOptions homeOverlay =
+                new GroundOverlayOptions().image(BitmapDescriptorFactory.fromResource(R.drawable.android)).position(home,100);
         setMapLongClick(mMap);
         setPoiClick(mMap);
+        mMap.addGroundOverlay(homeOverlay);
 
         try {
             // Customize the styling of the base map using a JSON object defined
