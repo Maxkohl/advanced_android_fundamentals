@@ -4,6 +4,7 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Build;
@@ -70,6 +71,12 @@ public class PulseAnimationView extends View {
 
         mPulseAnimatorSet.play(growAnimator).before(shrinkAnimator);
         mPulseAnimatorSet.play(repeatAnimator).after(shrinkAnimator);
-        
+
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        super.onDraw(canvas);
+        canvas.drawCircle(mX, mY, mRadius, mPaint);
     }
 }
