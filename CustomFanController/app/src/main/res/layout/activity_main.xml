@@ -23,6 +23,8 @@
         android:id="@+id/dialView"
         android:layout_width="@dimen/image_dimension"
         android:layout_height="@dimen/image_dimension"
+        app:fanOnColor="@color/gray1"
+        app:fanOffColor="@color/cyan1"
         app:layout_constraintTop_toBottomOf="@id/customViewLabel"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
