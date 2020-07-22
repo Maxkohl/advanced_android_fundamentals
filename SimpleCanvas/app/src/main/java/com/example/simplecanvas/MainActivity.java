@@ -1,6 +1,7 @@
 package com.example.simplecanvas;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -32,5 +33,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        mColorBackground = ResourcesCompat.getColor(getResources(),
+                R.color.colorBackground, null);
+        mColorRectangle = ResourcesCompat.getColor(getResources(),
+                R.color.colorRectangle, null);
+        mColorAccent = ResourcesCompat.getColor(getResources(),
+                R.color.colorAccent, null);
+
+        mPaint.setColor(mColorBackground);
+        mPaintText.setColor(ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null));
+        mPaintText.setTextSize(70);
+
+        mImageView = findViewById(R.id.myimageview);
     }
 }
