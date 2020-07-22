@@ -39,8 +39,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        SupportMapFragment mapFragment = SupportMapFragment.newInstance();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, mapFragment).commit();
         mapFragment.getMapAsync(this);
     }
 
@@ -135,6 +135,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 Marker poiMarker =
                         mMap.addMarker(new MarkerOptions().position(pointOfInterest.latLng).title(pointOfInterest.name));
                 poiMarker.showInfoWindow();
+                poiMarker.setTag("poi");
             }
         });
     }
