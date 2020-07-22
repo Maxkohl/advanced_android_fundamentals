@@ -25,6 +25,7 @@ public class GameView extends SurfaceView implements Runnable {
     private Bitmap mBitmapX;
     private Bitmap mBitmapY;
     private Bitmap mWinnerRect;
+    private boolean mRunning;
 
     public GameView(Context context) {
         super(context);
@@ -75,7 +76,20 @@ public class GameView extends SurfaceView implements Runnable {
                 mBitmapY + mBitmap.getHeight());
     }
 
-    
+    public void pause() {
+        mRunning = false;
+        try {
+            // Stop the thread (rejoin the main thread)
+            mGameThread.join();
+        } catch (InterruptedException e) {
+        }
+    }
+
+    public void resume() {
+        mRunning = true;
+        mGameThread = new Thread(this);
+        mGameThread.start();
+    }
 
 
 }
