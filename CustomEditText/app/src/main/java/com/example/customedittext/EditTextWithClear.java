@@ -33,7 +33,7 @@ public class EditTextWithClear extends AppCompatEditText {
     private void init() {
         mClearButtonImage = ResourcesCompat.getDrawable(getResources(),
                 R.drawable.ic_clear_opaque_24, null);
-
+        showClearButton();
         addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -42,8 +42,7 @@ public class EditTextWithClear extends AppCompatEditText {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                showClearButton();
-
+//                showClearButton();
             }
 
             @Override
