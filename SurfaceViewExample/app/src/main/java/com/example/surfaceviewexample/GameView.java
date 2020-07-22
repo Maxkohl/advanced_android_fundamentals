@@ -2,6 +2,7 @@ package com.example.surfaceviewexample;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
@@ -26,6 +27,7 @@ public class GameView extends SurfaceView implements Runnable {
     private Bitmap mBitmapY;
     private Bitmap mWinnerRect;
     private boolean mRunning;
+    private FlashlightCone mFlashlightCone;
 
     public GameView(Context context) {
         super(context);
@@ -91,5 +93,15 @@ public class GameView extends SurfaceView implements Runnable {
         mGameThread.start();
     }
 
-
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mViewWidth = w;
+        mViewHeight = h;
+        mFlashlightCone = new FlashlightCone(mViewWidth, mViewHeight);
+        mPaint.setTextSize(mViewHeight / 5);
+        mBitmap = BitmapFactory.decodeResource(
+                mContext.getResources(), R.drawable.android_skate);
+        setUpBitmap();
+    }
 }
