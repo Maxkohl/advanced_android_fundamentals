@@ -17,7 +17,11 @@ import android.view.MenuItem;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.StreetViewPanorama;
+import com.google.android.gms.maps.StreetViewPanoramaFragment;
+import com.google.android.gms.maps.StreetViewPanoramaOptions;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.SupportStreetViewPanoramaFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -66,6 +70,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 new GroundOverlayOptions().image(BitmapDescriptorFactory.fromResource(R.drawable.android)).position(home, 100);
         setMapLongClick(mMap);
         setPoiClick(mMap);
+        setInfoWindowClickToPanorama(mMap);
         mMap.addGroundOverlay(homeOverlay);
 
         enableMyLocation();
@@ -160,5 +165,20 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     break;
                 }
         }
+    }
+
+    private void setInfoWindowClickToPanorama(GoogleMap map) {
+        new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                if (marker.getTag() == "poi") {
+                    StreetViewPanoramaOptions options =
+                            new StreetViewPanoramaOptions().position(marker.getPosition());
+                    SupportStreetViewPanoramaFragment streetViewFragment =
+                            SupportStreetViewPanoramaFragment.newInstance(options);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, streetViewFragment).addToBackStack(null).commit();
+                }
+            }
+        };
     }
 }
