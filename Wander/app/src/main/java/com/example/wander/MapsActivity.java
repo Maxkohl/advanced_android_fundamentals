@@ -2,7 +2,11 @@ package com.example.wander;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
@@ -26,6 +30,7 @@ import java.util.Locale;
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
+    private static final int REQUEST_LOCATION_PERMISSION = 1;
     private GoogleMap mMap;
     private static final String TAG = MapsActivity.class.getSimpleName();
 
@@ -58,10 +63,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.addMarker(new MarkerOptions().position(home).title("Home Marker"));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(home, zoom));
         GroundOverlayOptions homeOverlay =
-                new GroundOverlayOptions().image(BitmapDescriptorFactory.fromResource(R.drawable.android)).position(home,100);
+                new GroundOverlayOptions().image(BitmapDescriptorFactory.fromResource(R.drawable.android)).position(home, 100);
         setMapLongClick(mMap);
         setPoiClick(mMap);
         mMap.addGroundOverlay(homeOverlay);
+
+        enableMyLocation();
 
         try {
             // Customize the styling of the base map using a JSON object defined
@@ -130,5 +137,27 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 poiMarker.showInfoWindow();
             }
         });
+    }
+
+    private void enableMyLocation() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        } else {
+            ActivityCompat.requestPermissions(this, new String[]
+                            {Manifest.permission.ACCESS_FINE_LOCATION},
+                    REQUEST_LOCATION_PERMISSION);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_LOCATION_PERMISSION:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    enableMyLocation();
+                    break;
+                }
+        }
     }
 }
