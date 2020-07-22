@@ -16,15 +16,15 @@ public class FlashlightCone {
         mY = newY;
     }
 
-    public int getmX() {
+    public int getX() {
         return mX;
     }
 
-    public int getmY() {
+    public int getY() {
         return mY;
     }
 
-    public int getmRadius() {
+    public int getRadius() {
         return mRadius;
     }
 }
