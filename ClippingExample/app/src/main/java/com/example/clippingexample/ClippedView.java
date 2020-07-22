@@ -1,13 +1,17 @@
 package com.example.clippingexample;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Rect;
 import android.graphics.RectF;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 
 public class ClippedView extends View {
     private Paint mPaint;
@@ -43,7 +47,7 @@ public class ClippedView extends View {
     private int mRowFour = mRowThree + mRectInset + mClipRectBottom;
     private int mTextRow = mRowFour + (int) (1.5 * mClipRectBottom);
 
-    private final RectF mRectF;
+    private RectF mRectF;
 
     public ClippedView(Context context) {
         super(context);
@@ -51,14 +55,31 @@ public class ClippedView extends View {
 
     public ClippedView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        setFocusable(true);
+        mPaint = new Paint();
+        // Smooth out edges of what is drawn without affecting shape.
+        mPaint.setAntiAlias(true);
+        mPaint.setStrokeWidth(
+                (int) getResources().getDimension(R.dimen.strokeWidth));
+        mPaint.setTextSize((int) getResources().getDimension(R.dimen.textSize));
+        mPath = new Path();
+
+        mRectF = new RectF(new Rect(mRectInset, mRectInset,
+                mClipRectRight-mRectInset, mClipRectBottom-mRectInset));
     }
 
     public ClippedView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     public ClippedView(Context context, @Nullable AttributeSet attrs, int defStyleAttr,
                        int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
+    }
+
+    private void drawClippedRectangle(Canvas canvas) {
+        canvas.clipRect(mClipRectLeft, mClipRectTop,
+                mClipRectRight, mClipRectBottom);
     }
 }
