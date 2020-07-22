@@ -15,7 +15,6 @@ import android.view.animation.AccelerateInterpolator;
 import android.view.animation.LinearInterpolator;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 
 
 public class PulseAnimationView extends View {
@@ -39,29 +38,16 @@ public class PulseAnimationView extends View {
         super(context, attrs, defStyleAttr);
     }
 
-    public void setRadius(float mRadius) {
-        this.mRadius = mRadius;
-        mPaint.setColor(Color.GREEN + (int) mRadius / COLOR_ADJUSTER);
-        invalidate();
-    }
-
-    @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
-            mX = event.getX();
-            mY = event.getY();
-        }
-        return super.onTouchEvent(event);
-    }
-
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         ObjectAnimator growAnimator = ObjectAnimator.ofFloat(this, "radius", 0, getWidth());
         growAnimator.setDuration(ANIMATION_DURATION).setInterpolator(new AccelerateInterpolator());
+
         ObjectAnimator shrinkAnimator = ObjectAnimator.ofFloat(this, "radius", getWidth(), 0);
         shrinkAnimator.setDuration(ANIMATION_DURATION).setInterpolator(new LinearInterpolator());
         shrinkAnimator.setStartDelay(ANIMATION_DELAY);
+
         ObjectAnimator repeatAnimator = ObjectAnimator.ofFloat(this,
                 "radius", 0, getWidth());
         repeatAnimator.setStartDelay(ANIMATION_DELAY);
@@ -73,6 +59,28 @@ public class PulseAnimationView extends View {
         mPulseAnimatorSet.play(repeatAnimator).after(shrinkAnimator);
 
     }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if (event.getActionMasked() == MotionEvent.ACTION_DOWN) {
+            mX = event.getX();
+            mY = event.getY();
+
+            if (mPulseAnimatorSet != null && mPulseAnimatorSet.isRunning()) {
+                mPulseAnimatorSet.cancel();
+            }
+            mPulseAnimatorSet.start();
+
+        }
+        return super.onTouchEvent(event);
+    }
+
+    public void setRadius(float radius) {
+        this.mRadius = radius;
+        mPaint.setColor(Color.GREEN + (int) mRadius / COLOR_ADJUSTER);
+        invalidate();
+    }
+
 
     @Override
     protected void onDraw(Canvas canvas) {
