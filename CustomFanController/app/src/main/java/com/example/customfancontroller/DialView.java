@@ -1,6 +1,7 @@
 package com.example.customfancontroller;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -19,40 +20,58 @@ public class DialView extends View {
     private final StringBuffer mTempLabel = new StringBuffer(8);
     private final float[] mTempResult = new float[2];
 
+    private int mFanOnColor;
+    private int mFanOffColor;
+
     public DialView(Context context) {
         super(context);
-        init();
+        init(null);
     }
 
     public DialView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        init();
+        init(attrs);
     }
 
     public DialView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init();
+        init(attrs);
     }
 
-    private void init() {
+    private void init(AttributeSet attrs) {
         mTextPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mTextPaint.setColor(Color.BLACK);
         mTextPaint.setStyle(Paint.Style.FILL_AND_STROKE);
         mTextPaint.setTextAlign(Paint.Align.CENTER);
         mTextPaint.setTextSize(40f);
         mDialPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-        mDialPaint.setColor(Color.GRAY);
         // Initialize current selection.
         mActiveSelection = 0;
+
+        mFanOnColor = Color.CYAN;
+        mFanOffColor = Color.GRAY;
+        mDialPaint.setColor(mFanOffColor);
+
+        if (attrs != null) {
+            TypedArray typedArray = getContext().obtainStyledAttributes(attrs,
+                    R.styleable.DialView,
+                    0, 0);
+            // Set the fan on and fan off colors from the attribute values.
+            mFanOnColor = typedArray.getColor(R.styleable.DialView_fanOnColor,
+                    mFanOnColor);
+            mFanOffColor = typedArray.getColor(R.styleable.DialView_fanOffColor,
+                    mFanOffColor);
+            typedArray.recycle();
+        }
 
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 mActiveSelection = (mActiveSelection + 1) % SELECTION_COUNT;
                 if (mActiveSelection >= 1) {
-                    mDialPaint.setColor(Color.GREEN);
+                    mDialPaint.setColor(mFanOnColor);
                 } else {
-                    mDialPaint.setColor(Color.GRAY);
+                    mDialPaint.setColor(mFanOffColor);
                 }
                 invalidate();
             }
