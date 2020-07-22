@@ -11,6 +11,11 @@ public class GameView extends SurfaceView implements Runnable {
 
     private Context mContext;
 
+    public GameView(Context context) {
+        super(context);
+        init(context);
+    }
+
 
     public GameView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -29,6 +34,7 @@ public class GameView extends SurfaceView implements Runnable {
         init(context);
 
     }
+
 
     @Override
     public void run() {
