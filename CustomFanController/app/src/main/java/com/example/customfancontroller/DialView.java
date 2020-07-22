@@ -22,7 +22,7 @@ public class DialView extends View {
     private int mFanOnColor;
     private int mFanOffColor;
 
-    private int mSelectionCount;
+    private int mSelectionCount = 1;
 
     public DialView(Context context) {
         super(context);
@@ -48,7 +48,6 @@ public class DialView extends View {
         mDialPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         // Initialize current selection.
         mActiveSelection = 0;
-        mSelectionCount = typedArray.getInt(R.styleable.DialView_selectionIndicators, mSelectionCount);
 
         mFanOnColor = Color.CYAN;
         mFanOffColor = Color.GRAY;
@@ -63,6 +62,9 @@ public class DialView extends View {
                     mFanOnColor);
             mFanOffColor = typedArray.getColor(R.styleable.DialView_fanOffColor,
                     mFanOffColor);
+            mSelectionCount =
+                    typedArray.getInt(R.styleable.DialView_selectionIndicators,
+                            mSelectionCount);
             typedArray.recycle();
         }
 
