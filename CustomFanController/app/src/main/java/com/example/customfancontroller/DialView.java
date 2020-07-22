@@ -2,10 +2,9 @@ package com.example.customfancontroller;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.view.View;
 
-import androidx.appcompat.widget.AppCompatImageView;
-
-public class DialView extends AppCompatImageView {
+public class DialView extends View {
     public DialView(Context context) {
         super(context);
     }
