@@ -9,7 +9,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 public class DialView extends View {
-    private static int SELECTION_COUNT = 4; // Total number of selections.
     private float mWidth;                   // Custom view width.
     private float mHeight;                  // Custom view height.
     private Paint mTextPaint;               // For text in the view.
@@ -22,6 +21,8 @@ public class DialView extends View {
 
     private int mFanOnColor;
     private int mFanOffColor;
+
+    private int mSelectionCount;
 
     public DialView(Context context) {
         super(context);
@@ -47,6 +48,7 @@ public class DialView extends View {
         mDialPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         // Initialize current selection.
         mActiveSelection = 0;
+        mSelectionCount = typedArray.getInt(R.styleable.DialView_selectionIndicators, mSelectionCount);
 
         mFanOnColor = Color.CYAN;
         mFanOffColor = Color.GRAY;
@@ -67,7 +69,7 @@ public class DialView extends View {
         setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                mActiveSelection = (mActiveSelection + 1) % SELECTION_COUNT;
+                mActiveSelection = (mActiveSelection + 1) % mSelectionCount;
                 if (mActiveSelection >= 1) {
                     mDialPaint.setColor(mFanOnColor);
                 } else {
@@ -85,13 +87,28 @@ public class DialView extends View {
         mRadius = (float) (Math.min(mWidth, mHeight) / 2 * 0.8);
     }
 
-    private float[] computeXYForPosition
-            (final int pos, final float radius) {
+    private float[] computeXYForPosition(final int pos, final float radius , boolean isLabel) {
         float[] result = mTempResult;
-        Double startAngle = Math.PI * (9 / 8d);   // Angles are in radians.
-        Double angle = startAngle + (pos * (Math.PI / 4));
-        result[0] = (float) (radius * Math.cos(angle)) + (mWidth / 2);
-        result[1] = (float) (radius * Math.sin(angle)) + (mHeight / 2);
+        Double startAngle;
+        Double angle;
+        if (mSelectionCount > 4) {
+            startAngle = Math.PI * (3 / 2d);
+            angle= startAngle + (pos * (Math.PI / mSelectionCount));
+            result[0] = (float) (radius * Math.cos(angle * 2))
+                    + (mWidth / 2);
+            result[1] = (float) (radius * Math.sin(angle * 2))
+                    + (mHeight / 2);
+            if((angle > Math.toRadians(360)) && isLabel) {
+                result[1] += 20;
+            }
+        } else {
+            startAngle = Math.PI * (9 / 8d);
+            angle= startAngle + (pos * (Math.PI / mSelectionCount));
+            result[0] = (float) (radius * Math.cos(angle))
+                    + (mWidth / 2);
+            result[1] = (float) (radius * Math.sin(angle))
+                    + (mHeight / 2);
+        }
         return result;
     }
 
@@ -102,8 +119,9 @@ public class DialView extends View {
         canvas.drawCircle(mWidth / 2, mHeight / 2, mRadius, mDialPaint);
         final float labelRadius = mRadius + 20;
         StringBuffer label = mTempLabel;
-        for (int i = 0; i < SELECTION_COUNT; i++) {
-            float[] xyData = computeXYForPosition(i, labelRadius);
+        for (int i = 0; i < mSelectionCount; i++) {
+            //... For text labels:
+            float[] xyData = computeXYForPosition(i, labelRadius, true);
             float x = xyData[0];
             float y = xyData[1];
             label.setLength(0);
@@ -112,10 +130,16 @@ public class DialView extends View {
         }
 
         final float markerRadius = mRadius - 35;
-        float[] xyData = computeXYForPosition(mActiveSelection,
-                markerRadius);
+        float[] xyData = computeXYForPosition(mActiveSelection, markerRadius, false);
         float x = xyData[0];
         float y = xyData[1];
         canvas.drawCircle(x, y, 20, mTextPaint);
+    }
+
+    public void setSelectionCount(int count) {
+        this.mSelectionCount = count;
+        this.mActiveSelection = 0;
+        mDialPaint.setColor(mFanOffColor);
+        invalidate();
     }
 }
