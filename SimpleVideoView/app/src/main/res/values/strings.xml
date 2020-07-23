@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SimpleVideoView</string>
+    <string name="playback_complete">Playback Complete</string>
 </resources>
