@@ -3,6 +3,7 @@ package com.example.simplevideoview;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.VideoView;
 
@@ -23,6 +24,34 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializePlayer() {
-
+        Uri videoUri = getMedia(VIDEO_SAMPLE);
+        mVideoView.setVideoURI(videoUri);
+        mVideoView.start();
     }
+
+    private void releasePlayer() {
+        mVideoView.stopPlayback();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        initializePlayer();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        releasePlayer();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
+            mVideoView.pause();
+        }
+    }
+
+
 }
