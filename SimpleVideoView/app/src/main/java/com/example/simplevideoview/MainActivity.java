@@ -7,7 +7,9 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.webkit.URLUtil;
 import android.widget.MediaController;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.VideoView;
 
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     private VideoView mVideoView;
     private int mCurrentPosition = 0;
     private static final String PLAYBACK_TIME = "play_time";
+    private TextView bufferingTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +35,16 @@ public class MainActivity extends AppCompatActivity {
         controller.setMediaPlayer(mVideoView);
         mVideoView.setMediaController(controller);
 
+        bufferingTextView = findViewById(R.id.buffering_textview);
+
     }
 
     private Uri getMedia(String mediaName) {
-        return Uri.parse("android.resource://" + getPackageName() + "/raw/" + mediaName);
+        if (URLUtil.isValidUrl(mediaName)) {
+            return Uri.parse(mediaName);
+        } else {
+            return Uri.parse("android.resource://" + getPackageName() + "/raw/" + mediaName);
+        }
     }
 
     private void initializePlayer() {
