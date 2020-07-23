@@ -31,7 +31,9 @@ public class PulseAnimationView extends View {
     private static final long ANIMATION_DELAY = 1000;
 
 
-    public PulseAnimationView(Context context) {this(context, null);}
+    public PulseAnimationView(Context context) {
+        this(context, null);
+    }
 
     public PulseAnimationView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -45,9 +47,9 @@ public class PulseAnimationView extends View {
         growAnimator.setInterpolator(new LinearInterpolator());
 
         ObjectAnimator shrinkAnimator = ObjectAnimator.ofFloat(this, "radius", getWidth(), 0);
+        shrinkAnimator.setStartDelay(ANIMATION_DELAY);
         shrinkAnimator.setDuration(ANIMATION_DURATION);
         shrinkAnimator.setInterpolator(new LinearOutSlowInInterpolator());
-        shrinkAnimator.setStartDelay(ANIMATION_DELAY);
 
         ObjectAnimator repeatAnimator = ObjectAnimator.ofFloat(this,
                 "radius", 0, getWidth());
@@ -72,6 +74,7 @@ public class PulseAnimationView extends View {
                 mPulseAnimatorSet.cancel();
             }
             mPulseAnimatorSet.start();
+            return true;
         }
         return super.onTouchEvent(event);
     }
