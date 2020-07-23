@@ -12,7 +12,8 @@ import android.widget.Toast;
 import android.widget.VideoView;
 
 public class MainActivity extends AppCompatActivity {
-    private static final String VIDEO_SAMPLE = "tacoma_narrows";
+    private static final String VIDEO_SAMPLE =
+            "https://developers.google.com/training/images/tacoma_narrows.mp4";
     private VideoView mVideoView;
     private int mCurrentPosition = 0;
     private static final String PLAYBACK_TIME = "play_time";
