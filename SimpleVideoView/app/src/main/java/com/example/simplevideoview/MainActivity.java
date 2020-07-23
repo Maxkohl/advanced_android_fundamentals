@@ -7,6 +7,7 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.URLUtil;
 import android.widget.MediaController;
 import android.widget.TextView;
@@ -48,14 +49,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializePlayer() {
+        bufferingTextView.setVisibility(View.VISIBLE);
         Uri videoUri = getMedia(VIDEO_SAMPLE);
         mVideoView.setVideoURI(videoUri);
-        if (mCurrentPosition > 0) {
-            mVideoView.seekTo(mCurrentPosition);
-        } else {
-            mVideoView.seekTo(1);
-        }
         mVideoView.start();
+        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mediaPlayer) {
+                bufferingTextView.setVisibility(View.INVISIBLE);
+                if (mCurrentPosition > 0) {
+                    mVideoView.seekTo(mCurrentPosition);
+                } else {
+                    mVideoView.seekTo(1);
+                }
+            }
+        });
         mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mediaPlayer) {
